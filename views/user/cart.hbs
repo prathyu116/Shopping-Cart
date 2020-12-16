@@ -1,0 +1,83 @@
+{{!-- <H1>cart is emppty</H1> --}}
+
+<section>
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Title</th>
+                    <TH scope="col">Price</TH>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    {{!-- {{#each this.product}} --}}
+                    <td><img style="height: 50px;width:60px" src="/product-images/{{this.product._id}}.jpg" alt="" srcset="">
+                    </td>
+                    {{!-- {{/each}} --}}
+
+                    <td>{{this.product.Name}}</td>
+                    <td>Rs.{{this.product.Price}}</td>
+                    
+                    <td>
+                        {{!-- <h1>ISERID=={{../user}}</h1> --}}
+                        <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+                        <button class="cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
+                    </td>
+                    <td>
+                        <a href='' class="btn btn-success">Remove</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <hr>
+        <div class="float-right pr-5">
+            <h5 class="float-left mr-5">TOTAL:Rs. <span id="total">{{totalValue}}</span></h5><br>
+            <a href="/place-order" class="btn btn-success mt-3" style="width: 100%;"><b>Place Order</b></a>
+        </div>
+    </div>
+</section>
+
+<script>
+    function changeQuantity(cartId,proId,count){
+        let quantity=parseInt(document.getElementById(proId).innerHTML)
+       count=parseInt(count)
+      
+       
+       $.ajax({
+           url:'/change-product-quantity', //engotttanue pokendath enn paranj kodukkunnu
+           data:{
+                
+               cart:cartId,
+               product:proId,     //venda datas
+               count:count,
+               quantity:quantity
+              
+              
+           },
+           method:'post',
+           success:(response)=>{
+             
+               if(response.removeProduct){
+                    alert('product removed from cart')
+                    location.reload()
+               }else{
+                   document.getElementById(proId).innerHTML=quantity+count
+                  
+
+                   
+                  
+                    
+
+               }
+
+              
+           }
+       })
+    }
+</script>
