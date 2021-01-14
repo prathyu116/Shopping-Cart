@@ -13,6 +13,7 @@
             </thead>
             <tbody>
                 {{#each products}}
+                <h1>{{this._id}}</h1>
                 <tr>
                     {{!-- {{#each this.product}} --}}
                     <td><img style="height: 50px;width:60px" src="/product-images/{{this.product._id}}.jpg" alt="" srcset="">
@@ -29,7 +30,7 @@
                         <button class="cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
                     </td>
                     <td>
-                        <a href='' class="btn btn-success">Remove</a>
+                          <a href="http://localhost:3000/cart/delete-cart/{{this._id}}" class="btn btn-danger " onclick="return confirm('are you sure want to delete {{this.Name}}')">Delete</a>
                     </td>
                 </tr>
                 {{/each}}

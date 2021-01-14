@@ -19,10 +19,30 @@
                     </li>
                    
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <div class="dropdown " >
+                <button class="btn btn-outline-success dropdown-toggle mr-4" type="button" id="dropdownMenuButton" style="outline-color: black;"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{#if admin}}
+                     <i class="fa fa-user"></i>
+                    {{admin.email}}
+                    {{else}}
+                    <i class="fa fa-user"></i>
+                    User Account
+                    {{/if}}
+
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {{#if admin}}
+                    <a class="dropdown-item " href="http://localhost:3000/admin/logoutadmin">Logout</a>
+
+                    {{else}}
+                    {{!-- <a class="dropdown-item  " href="/"><i class="fa fa-sign-in"></i> Login</a> --}}
+
+                    {{/if}}
+
+                </div>
+            </div>
             </div>
         </nav>
     </header>

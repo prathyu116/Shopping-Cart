@@ -8,10 +8,9 @@ var Razorpay=require('razorpay');
 const { resolve } = require("path");
 
 var instance = new Razorpay({
-  key_id: 'rzp_test_pgQGzo0YODK4UM',
-  key_secret: 'sx4Wlg35CgXsAhoplpTWYFgv',
+  key_id: 'rzp_test_KOTHbmObx2sshs',
+  key_secret: 'DVnAQpkaphxxmq0zLhlWA51s',
 });
-
 module.exports = {
   doSignup: (userData) => {
     return new Promise(async (resolve, reject) => {
@@ -202,6 +201,14 @@ module.exports = {
       }
     });
   },
+  deleteProduct:(proId)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.PRODUCT_COLLECTION).removeOne({_id:objectId(proId)}).then((response)=>{
+            resolve(response)
+        })
+    })
+
+},
   getTotalAmount: (userId) => {
     console.log("******************", userId);
 
@@ -357,7 +364,7 @@ module.exports = {
   verifyPayment:(details)=>{
     return new Promise((resolve,reject)=>{
       const crypto = require('crypto');
-      let hamc = crypto.createHmac('sha256', 'sx4Wlg35CgXsAhoplpTWYFgv')
+      let hamc = crypto.createHmac('sha256', 'DVnAQpkaphxxmq0zLhlWA51s')
       hamc.update(details['payment[razorpay_order_id]']+'|'+details[ 'payment[razorpay_payment_id]'])
       hamc=hamc.digest('hex')
       if(hamc==details['payment[razorpay_signature]']){

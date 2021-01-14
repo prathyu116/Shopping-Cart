@@ -104,7 +104,13 @@ router.post('/change-product-quantity',(req,res,next)=>{
     // response.totalValue=await userHelpers.getTotalAmount(req.body.user)
       res.json(response)
   })
-
+  router.get('http://localhost:3000/cart/delete-cart/:id',(req,res)=>{
+    let proId=req.params.id
+    console.log('pppppppppppppppppppppppppp',proId);
+    userHelpers.deleteProduct(proId).then((response)=>{
+      res.redirect('http://localhost:3000/cart')
+    })
+  })
   })
   router.get('/place-order',varifyLogin,async(req,res)=>{
     let total=await userHelpers.getTotalAmount(req.session.user._id)
