@@ -26,7 +26,6 @@ router.get('/', function(req, res, next) {
   }else{
     res.render('admin/admin-login',{"loggedErr":req.session.loggedErr,adminval:true})
     // alert('sooooooo')
-    
      req.session.loggedErr=false;
 
   }
