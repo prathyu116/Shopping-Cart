@@ -26,6 +26,7 @@ router.get('/', function(req, res, next) {
   }else{
     res.render('admin/admin-login',{"loggedErr":req.session.loggedErr,adminval:true})
     // alert('sooooooo')
+    
      req.session.loggedErr=false;
 
   }
@@ -51,7 +52,8 @@ router.get('/logoutadmin',(req,res)=>{
   res.redirect('http://localhost:3000/admin')
 })
 router.get('/add-product',function(req,res){
-  res.render('admin/add-product')
+  let admin=req.session.admin
+  res.render('admin/add-product',{adminval:true,admin})
 })
 router.post('/add-product',(req,res)=>{
    console.log(req.body)
