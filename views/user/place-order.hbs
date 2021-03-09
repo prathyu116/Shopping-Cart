@@ -4,20 +4,20 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2>Enter Delivary Details</h2>
+                   
                     <div>
                         <label for="">Address</label>
-                        <input type="text" class="form-control" id="Address" name="Address"
+                        <input type="text" class="form-control" id="Address" name="Address" value="{{user.Address}}"
                             placeholder="Enter your address">
                         <label for="">PIN </label>
-                        <input type="text" class="form-control" id="Pin" name="Pin" placeholder="Enter your PIN">
+                        <input type="text" class="form-control" id="Pin" name="Pin" placeholder="Enter your PIN" value="{{user.Pin}}">
                         <label for="">Mobile </label>
-                        <input type="text" class="form-control" id="Mobile" name="Mobile"
+                        <input type="text" class="form-control" id="Mobile" name="Mobile" value="{{user.Mobile}}"
                             placeholder="Enter your mobile">
                         <input type="text" id="" name="userId" value="{{user._id}}" hidden>
 
 
                     </div>
-
 
 
                 </div>

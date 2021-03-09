@@ -172,7 +172,8 @@ module.exports = {
   changeProductQuantity: (details) => {
     details.count = parseInt(details.count);
     details.quantity = parseInt(details.quantity);
-
+    details.Quantity=parseInt(details.Quantity)
+// console.log(details.quantity);
     return new Promise((resolve, reject) => {
       if (details.count == -1 && details.quantity == 1) {
         db.get()
@@ -186,7 +187,22 @@ module.exports = {
           .then(() => {
             resolve({ removeProduct: true });
           });
-      } else {
+      }else if ( details.quantity == 10 ) {
+        // db.get()
+        //   .collection(collection.CART_COLLECTION)
+        //   .updateOne(
+        //     { _id: objectId(details.cart) },
+        //     {
+        //       $pull: { products: { item: objectId(details.product) } },
+        //     }
+        //   )
+        //   .then(() => {
+        //     resolve({ removeProduct: true });
+        //   });
+        resolve({ stockProduct: true });
+      }
+      
+       else {
         db.get()
           .collection(collection.CART_COLLECTION)
           .updateOne(

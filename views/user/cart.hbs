@@ -8,12 +8,13 @@
                     <th scope="col">Item</th>
                     <th scope="col">Title</th>
                     <TH scope="col">Price</TH>
+                    <TH scope="col">Stock available</TH>
                     <th scope="col">Quantity</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each products}}
-                <h1>{{this._id}}</h1>
+                {{!-- <h1>{{this._id}}</h1> --}}
                 <tr>
                     {{!-- {{#each this.product}} --}}
                     <td><img style="height: 50px;width:60px" src="/product-images/{{this.product._id}}.jpg" alt="" srcset="">
@@ -22,6 +23,7 @@
 
                     <td>{{this.product.Name}}</td>
                     <td>Rs.{{this.product.Price}}</td>
+                    <td>{{this.product.Quantity}}</td>
                     
                     <td>
                         {{!-- <h1>ISERID=={{../user}}</h1> --}}
@@ -67,8 +69,21 @@
                if(response.removeProduct){
                     alert('product removed from cart')
                     location.reload()
-               }else{
+               }else if(response.stockProduct){
+                    document.getElementById(proId).innerHTML=quantity-count
+                    
+                   alert('Out Of Stock')
+                  
+
+                    
+                  
+                    
+
+               }
+               else{
+                    
                    document.getElementById(proId).innerHTML=quantity+count
+                    location.reload()
                   
 
                    
