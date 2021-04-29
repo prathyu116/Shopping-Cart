@@ -172,8 +172,8 @@ module.exports = {
   changeProductQuantity: (details) => {
     details.count = parseInt(details.count);
     details.quantity = parseInt(details.quantity);
-    details.Quantity=parseInt(details.Quantity)
-// console.log(details.quantity);
+    details.Quantity=details.Quantity;
+console.log('mmmmmmmmmmmmmmmmmmmmmm',details.Quantity);
     return new Promise((resolve, reject) => {
       if (details.count == -1 && details.quantity == 1) {
         db.get()
@@ -187,7 +187,7 @@ module.exports = {
           .then(() => {
             resolve({ removeProduct: true });
           });
-      }else if ( details.quantity == 10 ) {
+      }else if (   details.quantity==10) {
         // db.get()
         //   .collection(collection.CART_COLLECTION)
         //   .updateOne(
@@ -222,6 +222,23 @@ module.exports = {
         db.get().collection(collection.PRODUCT_COLLECTION).removeOne({_id:objectId(proId)}).then((response)=>{
             resolve(response)
         })
+    })
+
+},
+  deleteCart:(details)=>{
+    return new Promise((resolve,reject)=>{
+      db.get()
+          .collection(collection.CART_COLLECTION)
+          .updateOne(
+            { _id: objectId(details.cart) },
+            {
+              $pull: { products: { item: objectId(details.product) } },
+            }
+          )
+          .then(() => {
+            resolve({ removeProduct: true });
+          });
+        
     })
 
 },
@@ -366,7 +383,7 @@ module.exports = {
     return new Promise((resolve,reject)=>{
 
       var options = {
-        amount: total,  // amount in the smallest currency unit
+        amount: total*100,  // amount in the smallest currency unit
         currency: "INR",
         receipt:""+ orderId
       };

@@ -1,12 +1,12 @@
 <section>
-    <div class="row ">
+    <div class="row " style="margin-bottom: 10px;">
         <a href="admin/add-product" class="btn btn-success ml-auto mr-5 mt-3  ">Add Product</a>
     </div>
-    <div class="container">
+    <div class="container" >
         <table class="table mt-5" id="productsTable">
   <thead style="    background-color: teal;">
     <tr>
-      <th scope="col">NO</th>
+      {{!-- <th scope="col">NO</th> --}}
       <th scope="col">Name</th>
       <th scope="col">Category</th>
       
@@ -20,7 +20,7 @@
       {{#each products}}
     <tr>
       {{!-- <h1>{{this._id}}</h1> --}}
-      <th scope="row">1</th>
+      {{!-- <th scope="row">1</th> --}}
       <td>{{this.Name}}</td>
       <td>{{this.Category}}</td>
      

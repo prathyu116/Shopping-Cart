@@ -98,17 +98,18 @@ router.get('/add-to-cart/:id',(req,res)=>{  //.....varifyLogin ozhivzkkum for aj
   })
 })
 router.post('/change-product-quantity',(req,res,next)=>{
-  console.log('===============',req.body);
+  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@',req.body);
 
   userHelpers.changeProductQuantity(req.body).then(async(response)=>{
     // response.totalValue=await userHelpers.getTotalAmount(req.body.user)
       res.json(response)
   })
-  router.get('http://localhost:3000/cart/delete-cart/:id',(req,res)=>{
-    let proId=req.params.id
-    console.log('pppppppppppppppppppppppppp',proId);
-    userHelpers.deleteProduct(proId).then((response)=>{
-      res.redirect('http://localhost:3000/cart')
+  router.post('/delete-cart',(req,res)=>{
+    
+    
+    userHelpers.deleteCart(req.body).then(async(response)=>{
+      // response.totalValue=await userHelpers.getTotalAmount(req.body.user)
+        res.json(response)
     })
   })
   })
