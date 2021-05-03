@@ -3,7 +3,11 @@
 
 <section>
     <div class="col-sm-12 mb-3">
-        <input type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for names..">
+        <center>
+                    <input style="margin: 30px;width:700px;" type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for products..">
+
+
+        </center>
       </div>
     <div class="container mt-5">
         <div class="row" id="myItems">
@@ -23,8 +27,8 @@
                         alt="Card image cap"> --}}
                     <div class="card-body">
                         <h5 class="card-title">{{this.Name}}</h5>
-                        <p class="card-text">Rs.{{this.Price}}</p>
-                        <p class="card-text">Quantity available:{{this.Quantity}}</p>
+                        <p class="card-text">Rs.{{this.Price}}/{{this.measurement}}</p>
+                        <p class="card-text">Stock available:{{this.Stocks}}</p>
 
                         <p class="card-text">{{this.Description}}</p>
                         <div>

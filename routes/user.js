@@ -101,7 +101,7 @@ router.post('/change-product-quantity',(req,res,next)=>{
   console.log('@@@@@@@@@@@@@@@@@@@@@@@@@',req.body);
 
   userHelpers.changeProductQuantity(req.body).then(async(response)=>{
-    // response.totalValue=await userHelpers.getTotalAmount(req.body.user)
+    
       res.json(response)
   })
   router.post('/delete-cart',(req,res)=>{

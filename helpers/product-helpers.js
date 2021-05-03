@@ -9,6 +9,7 @@ module.exports={
     addProduct: (product,callback)=>{
       
        product.Price=parseInt(product.Price)
+       product.Stocks=parseInt(product.Stocks)
        
        
         db.get().collection('product').insertOne(product).then((data)=>{

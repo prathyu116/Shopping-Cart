@@ -172,8 +172,8 @@ module.exports = {
   changeProductQuantity: (details) => {
     details.count = parseInt(details.count);
     details.quantity = parseInt(details.quantity);
-    details.Quantity=details.Quantity;
-console.log('mmmmmmmmmmmmmmmmmmmmmm',details.Quantity);
+    console.log('444444444444444444444',details.quantity);
+    
     return new Promise((resolve, reject) => {
       if (details.count == -1 && details.quantity == 1) {
         db.get()
@@ -187,18 +187,18 @@ console.log('mmmmmmmmmmmmmmmmmmmmmm',details.Quantity);
           .then(() => {
             resolve({ removeProduct: true });
           });
-      }else if (   details.quantity==10) {
+      }else if (   details.quantity == details.stocks) {
         // db.get()
-        //   .collection(collection.CART_COLLECTION)
-        //   .updateOne(
-        //     { _id: objectId(details.cart) },
-        //     {
-        //       $pull: { products: { item: objectId(details.product) } },
-        //     }
-        //   )
-        //   .then(() => {
-        //     resolve({ removeProduct: true });
-        //   });
+        // .collection(collection.CART_COLLECTION)
+        // .updateOne(
+        //   { _id: objectId(details.cart), "products.item": objectId(details.product) },
+        //   {
+        //     $inc: { "products.$.quantity": details.count },
+        //   }
+        // )
+        // .then((response) => {
+        //   resolve({ stockProduct: true });
+        // });
         resolve({ stockProduct: true });
       }
       
@@ -330,7 +330,7 @@ console.log('mmmmmmmmmmmmmmmmmmmmmm',details.Quantity);
     return new Promise(async(resolve,reject)=>{
       let orders = await db.get().collection(collection.ORDER_COLLECTION)
       .find({userId:objectId(userId)}).toArray()
-      console.log(orders);
+      console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',orders);
       resolve(orders)
 
 
