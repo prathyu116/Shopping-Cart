@@ -1,0 +1,39 @@
+<section>
+ <center>
+        <h1 style="text-decoration: underline;"> All Users</h1>
+ </center>
+    <div class="container" >
+        <table class="table mt-5" id="productsTable">
+  <thead style="    background-color: rgb(76, 105, 105);">
+    <tr>
+      {{!-- <th scope="col">NO</th> --}}
+     
+      <th scope="col">Name</th>
+      <th scope="col">E-mail</th>
+      
+      <th scope="col">Address</th>
+      <th scope="col">PIN</th>
+      <th scope="col">Mobile</th>
+  
+
+    </tr>
+  </thead>
+  <tbody>
+       {{#each users}}
+    <tr>
+      {{!-- <h1>{{this._id}}</h1> --}}
+      {{!-- <th scope="row">1</th> --}}
+      <td>{{this.Name}}</td>
+      <td>{{this.Email}}</td>
+     
+      <td>{{this.Address}}</td>
+      <td>{{this.Pin}}</td>
+      <td>{{this.Mobile}}</td>
+     
+    </tr>
+        {{/each}}
+   
+  </tbody>
+</table>
+    </div>
+</section>

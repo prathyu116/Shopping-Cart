@@ -10,29 +10,46 @@
         </center>
       </div>
     <div class="container mt-5">
+         
+        
         <div class="row" id="myItems">
             {{#each products}}
             <div class="col-sm-4 col-md-3 p-3" >
-                <div class="card" style="width: 15rem; height:26rem">
+                <div   class="card" style="width: 15rem; height:26rem">
+                   
+                    {{!-- <div id="text">Out Of Stock</div> --}}
+                     
                     <div class=".card-container">
-                        <div class="img-container">
-                        <img class="card-img-top" style="height:14rem " src="/product-images/{{this._id}}.jpg"
+                        <div  class="img-container" style="position: relative;">
+                        <img   class="card-img-top" style="height:14rem ;" src="/product-images/{{this._id}}.jpg"
                             class="img-responsive" alt="Card image cap">
+                         
+                                       
+                                               {{!-- <h3  class="ptag" >OUT OF STOCK</h3> --}}
+                                            
+                                                 <h3 id="disable" style="display: none;" class="ptag" >OUT OF STOCK</h3>
+                                              
+
+                
+                                 
+                          
+                            
                     </div>
                      </div>
+                    
                    
 
                     
                     {{!-- <img class="card-img-top" style="height:15rem " src="/product-images/{{this._id}}.jpg" class="img-responsive"
                         alt="Card image cap"> --}}
-                    <div class="card-body">
+                    <div  class="card-body">
                         <h5 class="card-title">{{this.Name}}</h5>
                         <p class="card-text">Rs.{{this.Price}}/{{this.measurement}}</p>
-                        <p class="card-text">Stock available:{{this.Stocks}}</p>
+                        <p  class="card-text">Stock available:{{this.Stocks}}</p>
 
                         <p class="card-text">{{this.Description}}</p>
                         <div>
-                            <button onclick="addToCart('{{this._id}}')" class="btn btn-outline-success mt-1">Add to
+                            <button id="disable{{this._id}}"  onclick="addToCart('{{this._id}}','{{this.Stocks}}','disable{{this._id}}')" class="btn btn-outline-success mt-1">Add to
                                 Cart</button>
 
                         </div>
@@ -47,10 +64,17 @@
             {{/each}}
 
         </div>
+        </div>
+        
     </div>
+   
+
+
+
 </section>
 <script>
-    function myFunction() {
+     function myFunction() {
+       
     var input, filter, cards, cardContainer, h5, title, i;
     input = document.getElementById("myFilter");
     filter = input.value.toUpperCase();
@@ -65,4 +89,30 @@
         }
     }
 }
-</script>
+
+
+
+  
+  </script>
+  <style>
+    .card{
+              box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+      }
+.ptag{
+    
+   
+   border-radius: 10px;
+   letter-spacing: 3.5px;
+    position: absolute;
+    color: red;
+    background-color: #fbfbfb;
+    top:50%;
+ 
+   
+    left: :50%;
+      
+  
+    
+box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  </style>

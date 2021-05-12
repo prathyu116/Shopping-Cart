@@ -47,7 +47,7 @@ module.exports = {
       }
     });
   },
-  addToCart: (proId, userId) => {
+    addToCart: (proId, userId) => {
     let proObj = {
       item: objectId(proId),
       quantity: 1,
@@ -172,7 +172,7 @@ module.exports = {
   changeProductQuantity: (details) => {
     details.count = parseInt(details.count);
     details.quantity = parseInt(details.quantity);
-    console.log('444444444444444444444',details.quantity);
+    console.log('444444444444444444444',details);
     
     return new Promise((resolve, reject) => {
       if (details.count == -1 && details.quantity == 1) {
@@ -294,7 +294,9 @@ module.exports = {
   },
   placeOrder: (order,products,total) => {
       return new Promise((resolve,reject)=>{
-          console.log(order,products,total);
+          console.log('@@@@@@@@@@@@@@@@@',order,products,total);
+          console.log('===========>',products);
+          console.log('===========>',order);
           let status=order['payment-method']==='COD'?'placed':'pending'
           let orderObject={
               deliveryDetails:{
@@ -313,6 +315,14 @@ module.exports = {
           }
 
           db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObject).then((response)=>{
+              db.get().collection(collection.PRODUCT_COLLECTION).updateOne({"_id":objectId(products[0].item)},
+              {
+                $inc: { "Stocks":  -products[0].quantity },
+              }
+              )
+              
+           
+            
             db.get().collection(collection.ORDER_COLLECTION).removeOne({user:objectId(order.userId)})
               resolve(response.ops[0]._id)
           })

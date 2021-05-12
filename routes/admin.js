@@ -4,7 +4,9 @@ const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
 var productHelper=require('../helpers/product-helpers');
 var adminHelper=require('../helpers/admin-helpers');
+
 var session=require('express-session');
+const { log } = require('debug');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -104,5 +106,25 @@ router.post('/edit-product/:id',(req,res)=>{
 
   })
 })
+router.get('/view-users',function(req,res){
+  let admin=req.session.admin
+  adminHelper.getAlluser().then((users)=>{
+    console.log(users);
+    res.render('admin/view-users',{adminval:true,admin,users})
+
+  })
+  
+})
+router.get('/view-all-order',function(req,res){
+  let admin=req.session.admin
+  adminHelper.getUserOrder().then((orders)=>{
+  console.log(orders);
+    res.render('admin/view-all-order',{adminval:true,admin,orders})
+  })
+  
+  
+})
+
+ 
 
 module.exports = router;

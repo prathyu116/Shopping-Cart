@@ -39,14 +39,31 @@ module.exports = {
         resolve({ status: false });
       }
     });
+  },
+  getAlluser:()=>{
+    return new Promise(async(resolve,reject)=>{
+      let Users=await db.get().collection(collection.USER_COLLECTION).find().toArray()
+      resolve(Users)
+
+    })
+
+  },
+  getUserOrder:()=>{
+   
+    return new Promise(async(resolve,reject)=>{
+      let orders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+     
+      resolve(orders)
+
+
+    })
+ 
+
   }
  
-
-  
- 
  
 
-};
+}
 
 
 

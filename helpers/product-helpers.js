@@ -22,7 +22,9 @@ module.exports={
     getAllProducts:()=>{
         return new Promise(async(resolve,reject)=>{
             let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
+            let zeroStock = products.filter(product => product.Stocks == 0)
             resolve(products)
+           
         })
     },
     deleteProduct:(proId)=>{
@@ -54,6 +56,7 @@ module.exports={
                     Name:productDetails.Name,
                     Category:productDetails.Category,
                     Price:productDetails.Price,
+                    Stocks:productDetails.Stocks,
                     Description:productDetails.Description
                 }
             }).then((response)=>{
