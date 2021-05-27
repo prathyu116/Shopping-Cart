@@ -15,7 +15,9 @@
       <th scope="col">AMOUNT</th>
       <th scope="col">PAYMENT</th>
       <th scope="col">STATUS</th>
-      <th scope="col">ID's</th>
+     
+     
+      <th scope="col">OPTION</th>
      
     </tr>
   </thead>
@@ -37,16 +39,14 @@
       <td>{{this.totalAmount}}</td>
       <td>{{this.paymentMethod}}</td> -
       <td>{{this.status}}</td> 
-       <td class="dropdown2" >
-             <li>Cart ID:{{this._id}}</li>
-             <ul>
-                    <li >UserId :{{this.userId}}</li> 
-                   {{!-- <li>ProductId :{{this.products.item}}</li>  --}}
-             </ul>
-     
-       </td>
+       
     
-    
+     <td>
+        <a href="/admin/view-ordered-product/{{this.userId}}" class="btn btn-primary">View Products</a>
+
+       
+
+      </td>
      
     </tr>
     {{/each}}

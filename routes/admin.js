@@ -4,7 +4,7 @@ const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
 var productHelper=require('../helpers/product-helpers');
 var adminHelper=require('../helpers/admin-helpers');
-
+var userHelpers=require('../helpers/user-helpers');
 var session=require('express-session');
 const { log } = require('debug');
 
@@ -121,6 +121,25 @@ router.get('/view-all-order',function(req,res){
   console.log(orders);
     res.render('admin/view-all-order',{adminval:true,admin,orders})
   })
+  
+  
+})
+router.get('/view-ordered-product/:id', async(req,res)=>{
+  let userId=req.params.id
+  let admin=req.session.admin
+  let products=await adminHelper.getCartProducts(userId)
+  let totalValue=0;
+  if(products.length>0){
+  
+     totalValue=await userHelpers.getTotalAmount(userId)
+
+  }
+  
+  console.log(products);
+  // res.render('user/cart',{products,user:req.session.user,totalValue})
+  
+  res.render('admin/view-ordered-product',{adminval:true,admin,products,totalValue})
+
   
   
 })

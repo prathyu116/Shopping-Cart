@@ -59,6 +59,63 @@ module.exports = {
     })
  
 
+  },
+  getCartProducts: (userId) => {
+    console.log(userId, "userId");
+    return new Promise(async (resolve, reject) => {
+      let cartItems = await db
+        .get()
+        .collection(collection.CART_COLLECTION)
+        .aggregate([
+          {
+            $match: { user: objectId(userId) },
+          },
+          {
+            $unwind: "$products",
+          },
+          {
+            $project: {
+              item: "$products.item",
+              quantity: "$products.quantity",
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PRODUCT_COLLECTION,
+              localField: "item",
+              foreignField: "_id",
+              as: "product",
+            },
+          },
+          {
+            $project: {
+              item: 1,
+              quantity: 1,
+              product: { $arrayElemAt: ["$product", 0] },
+            },
+          },
+          // {
+          //     $lookup:{
+          //         from:collection.PRODUCT_COLLECTION,
+          //         let:{proList:'$products'},
+          //         pipeline:[
+
+          //             {
+          //                  $match:{
+          //                      $expr:{
+          //                          $in:['$_id',"$$proList"]
+          //                     }
+          //                 }
+          //             }
+          //         ],
+          //         as:'cartItems'
+          //     }
+          // }
+        ])
+        .toArray();
+      // console.log(cartItems[0].products);
+      resolve(cartItems);
+    });
   }
  
  

@@ -48,6 +48,8 @@ module.exports={
     },
     updateProduct:(proId,productDetails)=>{
         productDetails.Price=parseInt(productDetails.Price)
+        // productDetails.Stocks=parseInt(product.Stocks)
+      
        
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION)
