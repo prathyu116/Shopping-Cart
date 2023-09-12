@@ -1,0 +1,49 @@
+{{!-- <H1>cart is emppty</H1> --}}
+
+<section>
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Title</th>
+                    <TH scope="col">Price</TH>
+                  
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                {{!-- <h1>{{this._id}}</h1> --}}
+                <tr>
+                    {{!-- {{#each this.product}} --}}
+                    <td><img style="height: 50px;width:60px" src="/product-images/{{this.product._id}}.jpg" alt="" srcset="">
+                    </td>
+                    {{!-- {{/each}} --}}
+
+                    <td>{{this.product.Name}}</td>
+                    <td>Rs.{{this.product.Price}}</td>
+                   
+                    {{!-- <td >  {{this.product.Quantity}}</td> --}}
+                    
+                    
+                   
+                    <td>
+                        {{!-- <h1>ISERID=={{../user}}</h1> --}}
+                        <span >{{this.quantity}}</span>
+                        
+                    
+                </tr>
+                 
+                {{/each}}
+
+            </tbody>
+        </table>
+        <hr>
+        <div class="float-right pr-5">
+            <h5 class="float-left mr-5">TOTAL:Rs. <span id="total">{{totalValue}}</span></h5><br>
+        </div>
+    </div>
+</section>
+
+

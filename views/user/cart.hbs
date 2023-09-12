@@ -8,7 +8,7 @@
                     <th scope="col">Item</th>
                     <th scope="col">Title</th>
                     <TH scope="col">Price</TH>
-                    <TH scope="col">Stock available</TH>
+                  
                     <th scope="col">Quantity</th>
                 </tr>
             </thead>
@@ -23,19 +23,28 @@
 
                     <td>{{this.product.Name}}</td>
                     <td>Rs.{{this.product.Price}}</td>
-                    <td>{{this.product.Quantity}}</td>
+                   
+                    {{!-- <td >  {{this.product.Quantity}}</td> --}}
                     
+                    <h1 id="qq">{{this.product.Quantity}}
+                        
+                    </h1>
+                   
                     <td>
                         {{!-- <h1>ISERID=={{../user}}</h1> --}}
-                        <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                        <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',{{this.product.Stocks}},'disable{{this.product._id}}',-1)">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
-                        <button class="cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
+                        <button  id='disable{{this.product._id}}' class="cart-item-count ml-3 " onclick="changeQuantity('{{this._id}}','{{this.product._id}}',{{this.product.Stocks}},'disable{{this.product._id}}',1)">+</button>
                     </td>
                     <td>
-                          <a href="http://localhost:3000/cart/delete-cart/{{this._id}}" class="btn btn-danger " onclick="return confirm('are you sure want to delete {{this.Name}}')">Delete</a>
+                          {{!-- <a href="/delete-cart/{{this._id}}','{{this.product._id}}" class="btn btn-danger " onclick="return confirm('are you sure want to delete {{this.Name}}')">Delete</a> --}}
+                           <button  class="cart-item-count ml-3 btn btn-danger" onclick="myFunction('{{this._id}}','{{this.product._id}}')">Remove</button>
+                           
                     </td>
                 </tr>
+                 
                 {{/each}}
+
             </tbody>
         </table>
         <hr>
@@ -47,8 +56,13 @@
 </section>
 
 <script>
-    function changeQuantity(cartId,proId,count){
+
+
+    function changeQuantity(cartId,proId,stocks,disable,count){
+       
         let quantity=parseInt(document.getElementById(proId).innerHTML)
+        
+       
        count=parseInt(count)
       
        
@@ -59,6 +73,7 @@
                cart:cartId,
                product:proId,     //venda datas
                count:count,
+               stocks:stocks,
                quantity:quantity
               
               
@@ -70,15 +85,22 @@
                     alert('product removed from cart')
                     location.reload()
                }else if(response.stockProduct){
-                    document.getElementById(proId).innerHTML=quantity-count
+                                      document.getElementById(disable).disabled = true;
+
+                  
+                  
+
+                   
                     
                    alert('Out Of Stock')
-                  
+                     document.getElementById(proId).innerHTML=quantity-count
+                  {{!-- location.reload() --}}
+                    
+                    
 
                     
                   
                     
-
                }
                else{
                     
@@ -96,4 +118,42 @@
            }
        })
     }
+    
+    function myFunction(cartId,proId){
+         $.ajax({
+           url:'/delete-cart', //engotttanue pokendath enn paranj kodukkunnu
+           data:{
+                
+               cart:cartId,
+               product:proId,     //venda datas
+               
+              
+              
+           },
+           method:'post',
+           success:(response)=>{
+             
+               if(response.removeProduct){
+                    alert('product removed from cart')
+                    location.reload()
+               }
+               else{
+                    
+                  alert('errr')
+                    location.reload()
+                  
+
+                   
+                  
+                    
+
+               }
+
+              
+           }
+       })
+
+    }
+   
+    
 </script>

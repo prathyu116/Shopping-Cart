@@ -1,0 +1,65 @@
+<section>
+    <center>
+          <h1>All orders</h1>
+    </center>
+    <div class="row ">
+     
+    <div class="container">
+        <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">DATE</th>
+   
+      <th scope="col">Delivary Details</th>
+   
+      <th scope="col">AMOUNT</th>
+      <th scope="col">PAYMENT</th>
+      <th scope="col">STATUS</th>
+     
+     
+      <th scope="col">OPTION</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+      {{#each orders}}
+    <tr>
+     
+      <td>{{this.date}}</td>
+     <td class="dropdown" >
+         <li>{{this.deliveryDetails.Address}}</li>
+         <ul>
+ 
+      <li>{{this.deliveryDetails.Pin}}</li>
+      <li>{{this.deliveryDetails.Mobile}}</li>
+         </ul>
+     
+      </td>
+      
+      <td>{{this.totalAmount}}</td>
+      <td>{{this.paymentMethod}}</td> -
+      <td>{{this.status}}</td> 
+       
+    
+     <td>
+        <a href="/admin/view-ordered-product/{{this.userId}}" class="btn btn-primary">View Products</a>
+
+       
+
+      </td>
+     
+    </tr>
+    {{/each}}
+    
+  </tbody>
+</table>
+    </div>
+</section>
+<style>
+    .dropdown ul {display:none}
+
+.dropdown:hover ul {display:block;}
+    .dropdown2 ul {display:none}
+
+.dropdown2:hover ul {display:block;}
+</style>

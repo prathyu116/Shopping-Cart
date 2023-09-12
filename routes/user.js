@@ -6,6 +6,7 @@ var userHelper=require('../helpers/user-helpers');
 var session=require('express-session');
 const userHelpers = require('../helpers/user-helpers');
 const productHelpers = require('../helpers/product-helpers');
+const { log } = require('debug');
 
 const varifyLogin=(req,res,next)=>{
   if(req.session.loggedIn){
@@ -19,7 +20,7 @@ const varifyLogin=(req,res,next)=>{
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   let user=req.session.user
-  console.log(user)
+  console.log('uuuuuuuuuuuuu',user)
   let cartCount=null
   if(req.session.user){
     cartCount=await userHelpers.getCartCount(req.session.user._id)
@@ -27,8 +28,19 @@ router.get('/', async function(req, res, next) {
   }
 
   productHelper.getAllProducts().then((products)=>{
-    // console.log(products)
-    res.render('user/view-products',{products,user,cartCount});
+    let zeroStock = products.filter(product => product.Stocks == 0)
+   console.log('============>', zeroStock)
+   if(zeroStock.length==0){
+    status=false
+     
+   }else{
+    var status=true
+   }
+
+  
+    console.log("xxx",status);
+     
+     res.render('user/view-products',{products,user,cartCount,status});
 
 
   })
@@ -90,25 +102,30 @@ router.get( '/cart',varifyLogin,async(req,res)=>{
   console.log(products);
   res.render('user/cart',{products,user:req.session.user,totalValue})
 })
-router.get('/add-to-cart/:id',(req,res)=>{  //.....varifyLogin ozhivzkkum for ajax
+router.get('/add-to-cart/:id',(req,res)=>{ 
+   //.....varifyLogin ozhivzkkum for ajax
+   console.log('@@@@@@@@@@@@@@@@@@@@@@@@@',req.body);
+
   console.log('api call')
+ 
   userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
     // res.redirect('/')
     res.json({status:true})
   })
 })
 router.post('/change-product-quantity',(req,res,next)=>{
-  console.log('===============',req.body);
+  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@',req.body);
 
   userHelpers.changeProductQuantity(req.body).then(async(response)=>{
-    // response.totalValue=await userHelpers.getTotalAmount(req.body.user)
+    
       res.json(response)
   })
-  router.get('http://localhost:3000/cart/delete-cart/:id',(req,res)=>{
-    let proId=req.params.id
-    console.log('pppppppppppppppppppppppppp',proId);
-    userHelpers.deleteProduct(proId).then((response)=>{
-      res.redirect('http://localhost:3000/cart')
+  router.post('/delete-cart',(req,res)=>{
+    
+    
+    userHelpers.deleteCart(req.body).then(async(response)=>{
+      // response.totalValue=await userHelpers.getTotalAmount(req.body.user)
+        res.json(response)
     })
   })
   })
@@ -146,7 +163,7 @@ router.post('/change-product-quantity',(req,res,next)=>{
     res.render('user/orders',{user:req.session.user,orders})
   })
   router.get('/view-order-products/:id',async(req,res)=>{
-   let products=await userHelpers.getOrderProducts(req.params.id)
+   let products=await userHelpers. getOrderProducts(req.params.id)
     res.render('user/view-order-products',{user:req.session.user,products})
   })
   router.post('/verify-payment',(req,res)=>{

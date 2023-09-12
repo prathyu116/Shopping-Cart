@@ -39,14 +39,88 @@ module.exports = {
         resolve({ status: false });
       }
     });
+  },
+  getAlluser:()=>{
+    return new Promise(async(resolve,reject)=>{
+      let Users=await db.get().collection(collection.USER_COLLECTION).find().toArray()
+      resolve(Users)
+
+    })
+
+  },
+  getUserOrder:()=>{
+   
+    return new Promise(async(resolve,reject)=>{
+      let orders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+     
+      resolve(orders)
+
+
+    })
+ 
+
+  },
+  getCartProducts: (userId) => {
+    console.log(userId, "userId");
+    return new Promise(async (resolve, reject) => {
+      let cartItems = await db
+        .get()
+        .collection(collection.CART_COLLECTION)
+        .aggregate([
+          {
+            $match: { user: objectId(userId) },
+          },
+          {
+            $unwind: "$products",
+          },
+          {
+            $project: {
+              item: "$products.item",
+              quantity: "$products.quantity",
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PRODUCT_COLLECTION,
+              localField: "item",
+              foreignField: "_id",
+              as: "product",
+            },
+          },
+          {
+            $project: {
+              item: 1,
+              quantity: 1,
+              product: { $arrayElemAt: ["$product", 0] },
+            },
+          },
+          // {
+          //     $lookup:{
+          //         from:collection.PRODUCT_COLLECTION,
+          //         let:{proList:'$products'},
+          //         pipeline:[
+
+          //             {
+          //                  $match:{
+          //                      $expr:{
+          //                          $in:['$_id',"$$proList"]
+          //                     }
+          //                 }
+          //             }
+          //         ],
+          //         as:'cartItems'
+          //     }
+          // }
+        ])
+        .toArray();
+      // console.log(cartItems[0].products);
+      resolve(cartItems);
+    });
   }
  
-
-  
- 
  
 
-};
+}
 
 
 

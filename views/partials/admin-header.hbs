@@ -4,20 +4,21 @@
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">Admin Panel</a>
+            <a class="navbar-brand" href="http://localhost:3000/admin">Admin Panel</a>
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
+                    {{!-- <li class="nav-item active">
                         <a class="nav-link" href="/adminval/product">All Products <span class="sr-only">(current)</span></a>
-                    </li>
-                    {{!-- <li class="nav-item">
-                        <a class="nav-link" href="#">All Orders</a>
+                    </li> --}}
+{{#if admin}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/view-all-order">All Orders</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">All Users</a>
-                    </li> --}}
-                   
+                        <a class="nav-link" href="/admin/view-users">All Users</a>
+                    </li>
+                   {{/if}}
                 </ul>
                 <div class="dropdown " >
                 <button class="btn btn-outline-success dropdown-toggle mr-4" type="button" id="dropdownMenuButton" style="outline-color: black;"

@@ -1,7 +1,6 @@
 <section>
     <div class="row ">
-        {{!-- <a href="admin/add-product" class="btn btn-success ml-auto mr-5 mt-3  ">Add Product</a>
-    </div> --}}
+       
     <div class="container">
         <table class="table mt-5">
   <thead>
@@ -10,8 +9,10 @@
       <th scope="col">ADDRESS</th>
       <th scope="col">PINCODE</th>
       <th scope="col">MOBILE</th>
+      
       <th scope="col">AMOUNT</th>
       <th scope="col">PAYMENT</th>
+      <th scope="col">STATUS</th>
      
     </tr>
   </thead>
@@ -23,6 +24,7 @@
       <td>{{this.deliveryDetails.Address}}</td>
       <td>{{this.deliveryDetails.Pin}}</td>
       <td>{{this.deliveryDetails.Mobile}}</td>
+      
       <td>{{this.totalAmount}}</td>
       <td>{{this.paymentMethod}}</td>
       <td>{{this.status}}</td>

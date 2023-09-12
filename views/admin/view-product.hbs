@@ -1,17 +1,17 @@
 <section>
-    <div class="row ">
+    <div class="row " style="margin-bottom: 10px;">
         <a href="admin/add-product" class="btn btn-success ml-auto mr-5 mt-3  ">Add Product</a>
     </div>
-    <div class="container">
+    <div class="container" >
         <table class="table mt-5" id="productsTable">
   <thead style="    background-color: teal;">
     <tr>
-      <th scope="col">NO</th>
+      {{!-- <th scope="col">NO</th> --}}
       <th scope="col">Name</th>
       <th scope="col">Category</th>
       
       <th scope="col">Price</th>
-      <th scope="col">Total Quantity</th>
+      <th scope="col">Total Stock</th>
       <th>Image</th>
       <th>Options</th>
     </tr>
@@ -20,12 +20,12 @@
       {{#each products}}
     <tr>
       {{!-- <h1>{{this._id}}</h1> --}}
-      <th scope="row">1</th>
+      {{!-- <th scope="row">1</th> --}}
       <td>{{this.Name}}</td>
       <td>{{this.Category}}</td>
      
       <td>{{this.Price}}</td>
-      <td>{{this.Quantity}}</td>
+      <td>{{this.Stocks}}</td>
       <td><img style="height: 50px;width:60px" src="/product-images/{{this._id}}.jpg" alt="" srcset=""></td>
       <td>
         <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>

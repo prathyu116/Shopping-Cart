@@ -12,8 +12,15 @@
 
                      <label for="">Price</label>
                      <input type="text" class="form-control" name="Price" value="{{product.Price}}" >
-                      <label for="">Quantity</label>
-                     <input type="number" class="form-control" name="Quantity"> 
+                     {{!-- <label for="">Type of measurement</label>
+                      <input list="browsers" value="{{product.measurement}}" name="measurement" hidden>
+                                                <datalist id="browsers">
+                                                    <option value="Kg">
+                                                    <option value="Liter">
+                                                
+                                                </datalist> --}}
+                    <label for="">Stocks</label>
+                     <input type="number" class="form-control" value="{{product.Stocks}}" name="Stocks"> 
 
                      <label for="">Description</label>
                      <input type="text" class="form-control" name="Description" value="{{product.Description}}">
